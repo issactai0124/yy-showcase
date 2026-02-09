@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 全局字體與平滑滾動 */
+@layer base {
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    @apply bg-slate-50 text-slate-900 scroll-smooth;
+  }
+}
+
+/* 核心動畫 */
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes bounceIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* 截圖專用區域 */
+#share-capture-zone {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  width: 400px;
+}
+
+/* --- 核心 UI 組件類別 --- */
+@layer components {
+  .app-card {
+    @apply bg-white border border-slate-200 rounded-xl p-4 mb-4 shadow-sm transition-shadow duration-200;
+  }
+
+  .btn-pill {
+    @apply inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-sm font-bold transition-all;
+  }
+
+  .btn-pill-blue { @apply bg-blue-50 text-blue-600 hover:bg-blue-100; }
+  .btn-pill-pink { @apply bg-pink-50 text-pink-600 hover:bg-pink-100; }
+  .btn-pill-slate { @apply bg-slate-100 text-slate-500 hover:bg-slate-200; }
+
+  .app-btn-primary {
+    @apply bg-blue-600 text-white font-bold py-2.5 px-6 rounded-xl transition-colors duration-200 hover:bg-blue-700 disabled:bg-blue-300 disabled:cursor-not-allowed;
+  }
+
+  .app-input {
+    @apply w-full px-4 py-3 border border-slate-300 rounded-xl outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all bg-white;
+  }
+
+  .app-modal-overlay {
+    @apply fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-6 z-50;
+  }
+
+  .app-modal-content {
+    @apply bg-white rounded-[1.25rem] w-full max-w-md p-6 shadow-2xl;
+  }
+
+  .app-fab {
+    @apply fixed bottom-[6.5rem] right-6 w-14 h-14 bg-blue-600 text-white rounded-full shadow-lg shadow-blue-600/30 flex items-center justify-center z-20 hover:bg-blue-700 active:scale-95 transition-all;
+  }
+}
