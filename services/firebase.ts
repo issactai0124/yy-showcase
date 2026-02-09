@@ -2,6 +2,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import { Article, Course } from '../types';
 
+// 金鑰透過 vite.config.ts 注入 process.env，達成從 .env 導入的效果
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,

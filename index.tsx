@@ -14,3 +14,8 @@ root.render(
     <App />
   </React.StrictMode>,
 );
+
+// 線下支援
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/yy-showcase/sw.js").catch(() => {});
+}
