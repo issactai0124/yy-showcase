@@ -1,7 +1,7 @@
 {
   "name": "YY-showcase",
   "short_name": "YY",
-  "description": "YY Community Hub",
+  "description": "YY showcase",
   "start_url": "/yy-showcase/",
   "scope": "/yy-showcase/",
   "display": "standalone",
@@ -10,13 +10,13 @@
   "theme_color": "#2563eb",
   "icons": [
     {
-      "src": "/yy-showcase/icon-192.png",
+      "src": "/yy-showcase/public/images/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/yy-showcase/icon-512.png",
+      "src": "/yy-showcase/public/images/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -25,7 +25,7 @@
   "categories": ["education", "social"],
   "screenshots": [
     {
-      "src": "/yy-showcase/screenshot-540.png",
+      "src": "/yy-showcase/public/images/screenshot-540.png",
       "sizes": "540x720",
       "type": "image/png",
       "form_factor": "narrow"
