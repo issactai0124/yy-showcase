@@ -16,20 +16,27 @@ const ShareCard: React.FC<ShareCardProps> = ({ article }) => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-600 to-indigo-700 p-8 w-[400px] min-h-auto flex flex-col justify-between text-white font-sans">
+    <div className="relative bg-gradient-to-br from-blue-600 to-indigo-700 p-8 w-[400px] h-auto flex flex-col justify-between text-white font-sans antialiased overflow-hidden">
       <div>
-        <div className="flex items-center space-x-2 mb-8">
-          <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-lg overflow-hidden p-1">
+        <div className="flex items-center space-x-4 mb-8">
+          <div className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-2xl overflow-hidden p-1.5 ring-4 ring-white/20">
             <img
-              src="qr-code.png"
+              src="images/logo.png"
               alt="Logo"
               className="w-full h-full object-contain"
             />
           </div>
-          <span className="text-xl font-bold tracking-tight">YY-showcase</span>
+          <div className="flex flex-col">
+            <span className="text-2xl font-bold tracking-tight">
+              YY-showcase
+            </span>
+            <span className="text-blue-200 text-[10px] uppercase tracking-widest font-medium opacity-80">
+              Community Hub
+            </span>
+          </div>
         </div>
 
-        <h1 className="text-3xl font-extrabold mb-4 leading-tight">
+        <h1 className="text-3xl font-extrabold mb-4 leading-tight drop-shadow-sm">
           {article.title}
         </h1>
 
@@ -52,17 +59,22 @@ const ShareCard: React.FC<ShareCardProps> = ({ article }) => {
         </p>
       </div>
 
-      <div className="mt-8 pt-6 border-t border-blue-400/30 flex justify-between items-end">
+      <div className="mt-8 pt-6 border-t border-blue-400/30 flex justify-between items-center">
         <div>
           <p className="text-blue-200 text-sm font-medium">
             {formatDate(article.date)}
           </p>
-          <p className="text-white/60 text-xs mt-1">Community Hub</p>
+          <p className="text-white/60 text-xs mt-1 italic font-medium">
+            掃描二維碼了解更多詳情
+          </p>
         </div>
-        <div className="bg-white/10 px-3 py-1 rounded-full border border-white/20">
-          <span className="text-[10px] font-bold uppercase tracking-[0.2em]">
-            Live Update
-          </span>
+
+        <div className="w-16 h-16 rounded-xl flex items-center justify-center shadow-lg overflow-hidden p-1 ring-2 ring-white/30">
+          <img
+            src="images/qr-code.png"
+            alt="Scan for more"
+            className="w-full h-full object-contain"
+          />
         </div>
       </div>
     </div>
