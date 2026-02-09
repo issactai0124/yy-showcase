@@ -15,48 +15,34 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: "npm"
 
       - name: Install dependencies
         run: npm install
 
-      - name: Inject Firebase Config from Secrets
+      - name: Inject Firebase Config
         env:
-          # 這裡必須與你在 GitHub Settings > Secrets 中設定的名稱完全一致
           FIREBASE_SECRET_VALUES: ${{ secrets.firebaseConfig }}
         run: |
-          # 使用 Node.js 腳本動態替換程式碼中的配置區塊
           node -e "
             const fs = require('fs');
             const path = './services/firebase.ts';
-            let content = fs.readFileSync(path, 'utf8');
-            const secret = process.env.FIREBASE_SECRET_VALUES;
-            if (secret) {
-              // 匹配 const firebaseConfig = { ... }; 區塊並替換為 secret 內容
-              const regex = /const firebaseConfig = \{[\s\S]*?\};/;
-              content = content.replace(regex, 'const firebaseConfig = ' + secret + ';');
-              fs.writeFileSync(path, content);
-              console.log('Successfully injected Firebase Secrets into firebase.ts');
-            } else {
-              console.error('Error: Secret firebaseConfig not found in GitHub Actions env!');
-              process.exit(1);
+            if (fs.existsSync(path)) {
+              let content = fs.readFileSync(path, 'utf8');
+              const secret = process.env.FIREBASE_SECRET_VALUES;
+              if (secret) {
+                const regex = /const firebaseConfig = \{[\s\S]*?\};/;
+                content = content.replace(regex, 'const firebaseConfig = ' + secret + ';');
+                fs.writeFileSync(path, content);
+                console.log('Successfully injected Firebase Secrets');
+              }
             }
           "
 
-      - name: Build CSS
-        run: npx tailwindcss -i ./styles.css -o ./dist/styles.css --minify
+      - name: Build with Vite 🏗️
+        run: npm run build
 
-      - name: Prepare Files
-        run: |
-          # 建立發布目錄並複製所有必要檔案，保持目錄結構
-          cp index.html dist/
-          cp index.tsx dist/
-          cp App.tsx dist/
-          cp types.ts dist/
-          cp -r components/ dist/
-          cp -r services/ dist/
-          cp -r utils/ dist/
-
-      - name: Deploy
+      - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist
