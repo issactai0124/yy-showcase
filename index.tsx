@@ -17,5 +17,7 @@ root.render(
 
 // 線下支援
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/yy-showcase/sw.js").catch(() => {});
+  navigator.serviceWorker
+    .register(`${import.meta.env.BASE_URL}sw.js`, { scope: import.meta.env.BASE_URL })
+    .catch(() => { });
 }
